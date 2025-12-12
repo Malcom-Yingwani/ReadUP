@@ -9,6 +9,12 @@ node_modules
 .env.*
 !example.env 
 
+# Virtual Environment
+read_up-venv/
+venv/
+env/
+ENV/
+
 # dependencies
 /node_modules
 /.pnp
