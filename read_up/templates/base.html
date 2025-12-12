@@ -1,0 +1,179 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Read UP - {% block title %}Your Book Library{% endblock %}</title>
+    <script src="{% static 'js/htmx.min.js' %}"></script>
+
+    <!-- Bootstrap 5 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <style>
+        :root {
+            --brand-black: #1a1a1a;
+            --brand-red: #dc143c;
+            --brand-red-dark: #b01030;
+            --light-gray: #f8f9fa;
+        }
+        
+        body {
+            background-color: #ffffff;
+            color: var(--brand-black);
+        }
+        
+        .navbar {
+            background-color: var(--brand-black) !important;
+            border-bottom: 3px solid var(--brand-red);
+        }
+        
+        .navbar-brand {
+            font-weight: bold;
+            font-size: 1.5rem;
+            color: white !important;
+        }
+        
+        .brand-read {
+            color: white;
+        }
+        
+        .brand-up {
+            color: var(--brand-red);
+        }
+        
+        .navbar .nav-link {
+            color: rgba(255, 255, 255, 0.85) !important;
+        }
+        
+        .navbar .nav-link:hover {
+            color: var(--brand-red) !important;
+        }
+        
+        .navbar-text {
+            color: rgba(255, 255, 255, 0.85) !important;
+        }
+        
+        .btn-primary {
+            background-color: var(--brand-red);
+            border-color: var(--brand-red);
+        }
+        
+        .btn-primary:hover {
+            background-color: var(--brand-red-dark);
+            border-color: var(--brand-red-dark);
+        }
+        
+        .btn-outline-primary {
+            color: var(--brand-red);
+            border-color: var(--brand-red);
+        }
+        
+        .btn-outline-primary:hover {
+            background-color: var(--brand-red);
+            border-color: var(--brand-red);
+        }
+        
+        .btn-outline-secondary {
+            color: white;
+            border-color: white;
+        }
+        
+        .btn-outline-secondary:hover {
+            background-color: white;
+            color: var(--brand-black);
+        }
+        
+        .border-bottom {
+            border-color: var(--brand-red) !important;
+        }
+        
+        .text-primary {
+            color: var(--brand-red) !important;
+        }
+        
+        .bg-light {
+            background-color: var(--light-gray) !important;
+        }
+        
+        .link-red {
+            color: var(--brand-red);
+            text-decoration: none;
+        }
+        
+        .link-red:hover {
+            color: var(--brand-red-dark);
+            text-decoration: underline;
+        }
+        
+        .card {
+            border-color: #dee2e6;
+            transition: box-shadow 0.3s ease;
+        }
+        
+        .card:hover {
+            box-shadow: 0 0.5rem 1rem rgba(220, 20, 60, 0.15);
+        }
+        
+        .badge-red {
+            background-color: var(--brand-red);
+        }
+    </style>
+</head>
+
+<body hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'>
+    <nav class="navbar navbar-expand-md navbar-dark mb-4">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="{% url 'read_up:index' %}">
+            <span class="brand-read">Read</span><span class="brand-up">UP</span>
+        </a>
+
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+          <ul class="navbar-nav me-auto mb-2 mb-md-0">
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'read_up:books' %}">My Books</a>
+            </li>
+          </ul>
+
+          <ul class="navbar-nav ms-auto mb-2 mb-md-0">
+              {% if user.is_authenticated %}
+                <li class="nav-item">
+                  <span class="navbar-text me-3">Hello, {{ user.username }}</span>
+                </li>
+                <li class="nav-item">
+                  <form action="{% url 'accounts:logout' %}" method="post" class="d-inline">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-outline-secondary btn-sm">Log out</button>
+                  </form>
+                </li>
+              {% else %}
+                <li class="nav-item">
+                  <a class="nav-link" href="{% url 'accounts:register' %}">Register</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="{% url 'accounts:login' %}">Log in</a>
+                </li>
+              {% endif %}
+           </ul>
+        </div>
+      </div>
+    </nav>
+
+    <main class="container">
+      <div class="pb-2 mb-4 border-bottom">
+        {% block page_header %}{% endblock page_header %}
+      </div>
+
+      <div>
+        {% block content %}{% endblock content %}
+      </div>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
