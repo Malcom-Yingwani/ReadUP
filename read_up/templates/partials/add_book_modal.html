@@ -3,6 +3,7 @@
   hx-post="{% url 'read_up:new_book' %}" 
   hx-target="#books-container" 
   hx-swap="beforeend"
+  hx-on::after-request="if(event.detail.successful) { bootstrap.Modal.getInstance(this.closest('.modal')).hide(); this.reset(); }"
   enctype="multipart/form-data">
   {% csrf_token %}
   

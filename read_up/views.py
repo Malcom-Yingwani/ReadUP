@@ -45,7 +45,7 @@ def book(request, book_id):
         "book": book,
         "review": review,
     }
-    return render(request, "book.html", context)
+    return render(request, "book_detail.html", context)
 
 
 @login_required
@@ -60,7 +60,7 @@ def new_book(request):
         # Return partial containing a new row for our user
         # that wecan add to the table
         context = {"book": book}
-        response = render(request, "partials/book-row.html", context)
+        response = render(request, "partials/book_row.html", context)
         response["HX-Trigger"] = "success"
         return response
     else:

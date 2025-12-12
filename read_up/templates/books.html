@@ -20,7 +20,7 @@
 <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4" id="books-container">
   {% if books %}
     {% for book in books %}
-      {% include 'book-card.html' with book=book %}
+      {% include 'partials/book_card.html' with book=book %}
     {% endfor %}
   {% endif %}
 </div>
