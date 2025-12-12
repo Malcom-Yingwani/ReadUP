@@ -12,8 +12,6 @@ node_modules
 # Virtual Environment
 read_up-venv/
 venv/
-env/
-ENV/
 
 # dependencies
 /node_modules
