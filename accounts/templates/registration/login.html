@@ -6,11 +6,14 @@
 {% endblock page_header %}
 
 {% block content %}
-<form action="{% url 'accounts:login' %}" method = 'post'>
-  {% csrf_token %}
-  {% bootstrap_form form %}
-  {% bootstrap_button button_type="submit" content="Log in" %}
-  
-</form>
+<div class="card h-100 shadow-sm">
+  <div class="card-body">
+    <form action="{% url 'accounts:login' %}" method = 'post'>
+      {% csrf_token %}
+      {% bootstrap_form form %}
+      {% bootstrap_button button_type="submit" content="Log in" %}
+    </form>
+  </div>
+</div>
 
 {% endblock content %}
