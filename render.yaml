@@ -1,8 +1,8 @@
 databases:
   - name: readUPdb
     plan: free
-    databaseName: readUP_db
-    user: readUP_user
+    databaseName: readup_db
+    user: readup_user
 
 services:
   - type: web
