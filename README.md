@@ -1,4 +1,4 @@
-#ReadUP
+# ReadUP
 
 A Django + HTMX web application for tracking and managing books.
 
